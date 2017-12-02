@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quizzer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,7 +23,16 @@ namespace Quizzer.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            using (var context = new Context())
+            {
+                var projects = context.Project.ToList();
+                foreach (var project in projects)
+                {
+                    var a = project.Description;
+                    ViewBag.Message = a;
+                }
+
+            }
 
             return View();
         }
